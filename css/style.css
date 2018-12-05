@@ -1,0 +1,12 @@
+body{
+    overflow-x: hidden;
+}
+
+.namecls{
+    min-width: 30em;
+}
+
+.description{
+    min-width: 30em;
+    width: 30em;
+}
