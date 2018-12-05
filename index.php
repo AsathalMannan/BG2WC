@@ -89,7 +89,7 @@
                 <th>Is featured?</th>
                 <th>Visibility in catalog</th>
                 <th>Short description</th>
-                <th name="description">Description</th>
+                <th>Description</th>
                 <th>Date sale price starts</th>
                 <th>Date sale price ends</th>
                 <th>Tax status</th>
@@ -129,6 +129,7 @@
             </thead>
             <tbody>
               <?php 
+              $variationCount = 0;
               for ($rowno = 0; $rowno < count($csv); $rowno++) {
                 echo '<tr style="height:50%;">';
                   echo ('<td>'.$id=($rowno+1).'</td>');
@@ -165,7 +166,8 @@
                       continue;
                     }
                     echo $csv[$rowno]['product_image_'.$i] . ',';
-                  }echo '</td>';
+                  }
+                  echo '</td>';
 
                   echo '<td>'.'</td>';
                   echo '<td>'.'</td>';
@@ -183,6 +185,8 @@
                     $filter = array('Color', 'Size');
                     if (stripos(json_encode($var),'Color') !== false) {
                       echo "Color";
+                      $isvariation = true;
+                      $type = "Color";
                     }
                     
                   echo '</td>';
@@ -193,15 +197,19 @@
                     }
 
                     for($i=0; $i<count($var); $i++){
-                      if($var[$i] == null)
+                      if($var[$i] == null){
                         continue;
-                      else
+                      }
+                      else{
+                        $variationCount++;
                         echo $var[$i];
-                        if($i+2 == count($var))
+                        if($i+2 == count($var)){
                           continue;
-                        else
+                        }
+                        else{
                           echo ", ";
-                        
+                        }
+                      }  
                     }
                     
                   echo '</td>';
@@ -212,7 +220,16 @@
                   echo '<td>'.'</td>';
                   echo '<td>'.'</td>';
                 echo '</tr>';
+
+                if($isvariation == true){
+                  variationRow($rowno, $type, $variationCount);
+                }
               }
+              
+              function variationRow(){
+                echo "966237989";
+              }
+
               ?>
             </tbody>
           </table>
